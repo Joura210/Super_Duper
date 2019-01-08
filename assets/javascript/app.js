@@ -54,18 +54,17 @@ var superHero = ["Gambit", "Wolverine", "Nightcrawler", "Colossus", "Beast"]
 
   // Calling the renderButtons function to display the intial buttons
   renderButtons();
-  $("button").on("click" , function(){
+  $("#buttons-view").on("click" , "button" , function(){
   var superHeroGif = $(this).attr("data-name");
-
+    console.log(this);
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + superHeroGif
    + "&api_key=A92vVwRV8KfmQO8vxolt6RQ8jjUDq8Z4&limit=10";
+// Get the data into the button to get the API to pull gifs
 
-
-  $.ajax({url:queryURL,
+  $.ajax({
+    url: queryURL,
   method: "GET"
-})
-  // After the data comes back from the API
-  .then(function(response) {
+}).then(function(response) {
     console.log(response);
     // Storing an array of results in the results variable
     var results = response.data;
