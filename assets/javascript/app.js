@@ -88,8 +88,11 @@ var superHero = ["Gambit", "Wolverine", "Nightcrawler", "Colossus", "Beast"]
 
         // Giving the image tag an src attribute of a proprty pulled off the
         // result item
-        personImage.attr("src", results[i].images.fixed_height.url);
-
+        personImage.attr("src", results[i].images.fixed_height.url)
+          .attr('data-still' , results[i].images.fixed_height_still.url)
+          .attr('data-animate' , results[i].images.fixed_height.url)
+          .attr('data-state' , "still")
+          .addClass("showImage");
         // Appending the paragraph and personImage we created to the "gifDiv" div we created
         gifDiv.append(p);
         gifDiv.append(personImage);
@@ -100,9 +103,20 @@ var superHero = ["Gambit", "Wolverine", "Nightcrawler", "Colossus", "Beast"]
     }
   });
 
-  });
+
 // renderButtons();
 
-  
+  $(document).on('click' , ".showImage" , function(){
 
-  
+      var state = $(this).data('state');
+      if( state == "still") {
+        $(this).attr('src' , $(this).data('animate'))
+              .data('state', 'animate');
+      } else {
+        $(this).attr('src' , $(this).data('still'))
+            .data('state', 'still')
+      }
+
+  });
+
+});
